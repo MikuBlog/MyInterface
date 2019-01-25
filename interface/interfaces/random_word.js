@@ -39,7 +39,6 @@ function insertWord(req, res) {
     }
     randomWord.create(data, (err) => {
         if(err) {
-            console.log(err)
             res.send({
                 status: "error",
                 msg: "上传随机一言失败"
