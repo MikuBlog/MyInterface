@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 
+// 随机请求本地图片
 function getPicture(req, res) {
     var length;
     new Promise((resolve, reject) => {
