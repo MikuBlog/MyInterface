@@ -1,7 +1,6 @@
 require('./database/database_start')
 
 const express = require('express')
-const fs = require('fs')
 const bodyParser = require('body-parser')
 const randomWord = require('./interfaces/random_word')
 const randomPic = require('./interfaces/random_pic')
