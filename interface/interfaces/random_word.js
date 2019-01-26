@@ -12,7 +12,7 @@ function getRandomWord(req, res) {
         })
         return
     }
-    randomWord.find({type: name}, {"_id": 0,"show": 0, "_v": 0}, (err, details) => {
+    randomWord.find({type: name}, {"_id": 0,"show": 0, "__v": 0}, (err, details) => {
         if(err) {
             res.send({
                 status: "error",
@@ -39,7 +39,6 @@ function insertWord(req, res) {
     }
     randomWord.create(data, (err) => {
         if(err) {
-            console.log(err)
             res.send({
                 status: "error",
                 msg: "上传随机一言失败"
