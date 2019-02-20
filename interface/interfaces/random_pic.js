@@ -15,6 +15,7 @@ function getPicture(req, res) {
             	const fileName = files[parseInt(Math.random() * files.length)]
             	// 获取文件对应名称
             	const number = url.parse(req.url).query.split('&')[1] ? decodeURI(url.parse(req.url).query.split('&')[1].split('=')[1]) : ""
+                // 如果不含该图片id，返回错误图片
                 resolve(number ? (number < files.length ? number + ".jpg" : "error") : fileName)
             }catch(e) {
             	reject(e)
