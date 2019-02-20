@@ -1,18 +1,17 @@
 const fs = require('fs')
 const path = require('path')
 
-// 随机请求本地图片
 function getPicture(req, res) {
     new Promise((resolve, reject) => {
         fs.readdir('./static/images/', (err, files) => {
             if (err) {
                 reject(err)
             }
-            const length = files.length
-            resolve(length)
+            const fileName = files[parseInt(Math.random() * files.length)]
+            resolve(fileName)
         })
-    }).then((length) => {
-        res.sendFile(path.join(__dirname, `../static/images/${parseInt(Math.random() * length)}.jpg`))
+    }).then((fileName) => {
+        res.sendFile(path.join(__dirname, `../static/images/${fileName}`))
     }).catch((err) => {
         res.send({
             status: "error"
