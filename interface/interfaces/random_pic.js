@@ -9,7 +9,7 @@ function getPicture(req, res) {
     			if(err) {
     				reject(err)
     			}		
-    			resolve(url.parse(req.url).query ? decodeURI(url.parse(req.url).query.split('&')[0].split('=')[1]) : files[parseInt(Math.random() * files.length)])	
+    			resolve(url.parse(req.url).query ? decodeURI(url.parse(req.url).query.split('&')[0].split('=')[1]) : files[parseInt(Math.random() * files.length)])
     		})
     }).then((getPath) => {
         return new Promise((resolve, reject) => {
@@ -28,21 +28,21 @@ function getPicture(req, res) {
             		number = ""
             	}
             	resolve({
-            		getPath: getPath,
-            		fileName: number ? (number < files.length ? number + ".jpg" : "error") : fileName
+            		getPath: 	getPath,
+            		fileName: number ? (number < files.length && number >= 0 ? files[number] : "error") : fileName
             	})
             }catch(e) {
             	reject(e)
             }
-        })	
-       })
+        	})	
+        })
     }).then((obj) => {
      	// 如果没有该图片，返回错误图片
-    	if(obj.fileName == "error") {
-    		res.sendFile(path.join(__dirname, `../error/error.jpg`))
-    		return
-    	}
-    	// 返回图片
+    		if(obj.fileName == "error") {
+    			res.sendFile(path.join(__dirname, `../error/error.jpg`))
+    			return
+    		}
+    		// 返回图片
         res.sendFile(path.join(__dirname, `../static/${obj.getPath}/${obj.fileName}`))
     }).catch((err) => {
     		// 如果没有该图片，返回错误图片
