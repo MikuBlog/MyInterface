@@ -24,14 +24,18 @@ const url = require('url')
  
 function getRandomData(req, res) {
 	const array = url.parse(req.url).query ? url.parse(req.url).query.split('&') : ""
-	var count = ""
+	var count, page
 	const obj = {
 		status: "ok",
+		page: 1,
+		count: 10,
 		data: []
 	}
 	try {
 		count = array[1].split('=')[1]
+		page = array[0].split('=')[1]
 	}catch(e) {
+		page = 1
 		count = 10
 	}
 	for(var i = 0; i < count; i ++) {
@@ -61,6 +65,7 @@ function getRandomData(req, res) {
 		})
 	}
 	obj.count = count
+	obj.page = page
 	res.send(obj)
 }
 
