@@ -4,15 +4,15 @@ const path = require('path')
 
 // 数组乱序
 function shuffle(array) {
-	var i, j, t 
+	var i, j, t, picArr = [...array]
 	// 通过遍历数组,随机调换数组元素
-	for(i = array.length; i; i --) {
+	for(i = picArr.length; i; i --) {
 		j = Math.floor(Math.random() * i)
-		t = array[i - 1]
-		array[i - 1] = array[j]
-		array[j] = t
+		t = picArr[i - 1]
+		picArr[i - 1] = array[j]
+		picArr[j] = t
 	}
-	return array 	
+	return picArr 	
 }
 
 function getPicture(req, res) {
@@ -32,6 +32,7 @@ function getPicture(req, res) {
             if (err) {
                 reject(err)
             }
+            console.log(files[0] === shuffle(files)[0])
             try {
             	// 获取文件名称
             	const fileName = shuffle(files)[0]
